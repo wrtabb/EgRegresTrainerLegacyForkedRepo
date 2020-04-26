@@ -9,7 +9,7 @@ import argparse
 def main():
     parser = argparse.ArgumentParser(description='runs the SC regression trainings')
     parser.add_argument('--era',required=True,help='year to produce for, 2016, 2017, 2018 are the options')
-    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/2016ULSC',help='input directory with the ntuples')
+    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/2016UL',help='input directory with the ntuples')
     parser.add_argument('--output_dir','-o',default="results",help='output dir')
     args = parser.parse_args()
 
@@ -22,9 +22,9 @@ def main():
     #             ECAL Real IC train = eventnr%10=1
     #             ECAL ECAL-Trk IC train = eventnr%10=2
     run_step1 = True
-    run_step2 = True
-    run_step3 = True
-    run_step4 = True
+    run_step2 = False 
+    run_step3 = False
+    run_step4 = False
     run_step4_extra = False
     
     base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && {extra_cuts})"
@@ -66,7 +66,7 @@ def main():
     regArgs.cuts_base = base_ele_cuts.format(extra_cuts = ideal_eventnr_cut)
     regArgs.cuts_name = "stdCuts"
     regArgs.cfg_dir = "configs"
-    regArgs.out_dir = "../results/"+era_name 
+    regArgs.out_dir = "../results/2016_StdExt" 
     regArgs.ntrees = 1500  
     regArgs.base_name = "regEleEcal{era_name}_IdealIC_IdealTraining".format(era_name=era_name)
     if run_step1: regArgs.run_eb_and_ee()
