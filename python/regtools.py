@@ -55,37 +55,168 @@ class RegArgs:
     
     def set_ecal_default(self):
         self.target = "mc.energy/(sc.rawEnergy + sc.rawESEnergy)"
-        self.var_eb = ':'.join(["sc.rawEnergy","sc.etaWidth","sc.phiWidth","sc.seedClusEnergy/sc.rawEnergy","ssFull.e5x5/sc.rawEnergy","ele.hademTow",
-                                "rho","sc.dEtaSeedSC","sc.dPhiSeedSC","ssFull.e3x3/sc.rawEnergy","ssFull.sigmaIEtaIEta","ssFull.sigmaIEtaIPhi","ssFull.sigmaIPhiIPhi",#12
-                                "ssFull.eMax/ssFull.e5x5","ssFull.e2nd/ssFull.e5x5","ssFull.eTop/ssFull.e5x5","ssFull.eBottom/ssFull.e5x5","ssFull.eLeft/ssFull.e5x5","ssFull.eRight/ssFull.e5x5",
-                                "ssFull.e2x5Max/ssFull.e5x5","ssFull.e2x5Left/ssFull.e5x5","ssFull.e2x5Right/ssFull.e5x5","ssFull.e2x5Top/ssFull.e5x5","ssFull.e2x5Bottom/ssFull.e5x5",
-                                "ele.nrSatCrys","sc.numberOfClusters","sc.iEtaOrX","sc.iPhiOrY","sc.iEtaMod5","sc.iPhiMod2","sc.iEtaMod20","sc.iPhiMod20"])
+        self.var_eb = ':'.join(["sc.rawEnergy",
+                                "sc.etaWidth",
+                                "sc.phiWidth",
+                                "sc.seedClusEnergy/sc.rawEnergy",
+                                "sc.etaGapCode", #near gap in crystal
+                                "sc.phiGapCode", #near gap in crystal
+                                "sc.nearbyChanStatus", #near dead channels
+                                "ssFull.e5x5/sc.rawEnergy",
+                                "ele.hademTow",#H/E
+                                "rho",
+                                "sc.dEtaSeedSC",
+                                "sc.dPhiSeedSC",
+                                "ssFull.e3x3/sc.rawEnergy",
+                                "ssFull.sigmaIEtaIEta",
+                                "ssFull.sigmaIEtaIPhi",
+                                "ssFull.sigmaIPhiIPhi",#12
+                                "ssFull.eMax/ssFull.e5x5",
+                                "ssFull.e2nd/ssFull.e5x5",
+                                "ssFull.eTop/ssFull.e5x5",
+                                "ssFull.eBottom/ssFull.e5x5",
+                                "ssFull.eLeft/ssFull.e5x5",
+                                "ssFull.eRight/ssFull.e5x5",
+                                "ssFull.e2x5Max/ssFull.e5x5",
+                                "ssFull.e2x5Left/ssFull.e5x5",
+                                "ssFull.e2x5Right/ssFull.e5x5",
+                                "ssFull.e2x5Top/ssFull.e5x5",
+                                "ssFull.e2x5Bottom/ssFull.e5x5",
+                                "ele.nrSatCrys",
+                                "sc.numberOfClusters",
+                                "sc.iEtaOrX",
+                                "sc.iPhiOrY",
+                                "sc.iEtaMod5",
+                                "sc.iPhiMod2",
+                                "sc.iEtaMod20",
+                                "sc.iPhiMod20"])
 
-        self.var_ee = ':'.join(["sc.rawEnergy","sc.etaWidth","sc.phiWidth","sc.seedClusEnergy/sc.rawEnergy","ssFull.e5x5/sc.rawEnergy","ele.hademTow", #5
-                                "rho","sc.dEtaSeedSC","sc.dPhiSeedSC","ssFull.e3x3/sc.rawEnergy","ssFull.sigmaIEtaIEta","ssFull.sigmaIEtaIPhi","ssFull.sigmaIPhiIPhi", #12
-                                "ssFull.eMax/ssFull.e5x5","ssFull.e2nd/ssFull.e5x5","ssFull.eTop/ssFull.e5x5","ssFull.eBottom/ssFull.e5x5","ssFull.eLeft/ssFull.e5x5","ssFull.eRight/ssFull.e5x5",
-                                "ssFull.e2x5Max/ssFull.e5x5","ssFull.e2x5Left/ssFull.e5x5","ssFull.e2x5Right/ssFull.e5x5","ssFull.e2x5Top/ssFull.e5x5","ssFull.e2x5Bottom/ssFull.e5x5",
-                                "ele.nrSatCrys","sc.numberOfClusters","sc.iEtaOrX","sc.iPhiOrY","sc.rawESEnergy/sc.rawEnergy"])
+	self.var_ee = ':'.join(["sc.rawEnergy",
+                                "sc.etaWidth",
+                                "sc.phiWidth",
+                                "sc.seedClusEnergy/sc.rawEnergy",
+                                "sc.etaGapCode", #near gap in crystal
+                                "sc.phiGapCode", #near gap in crystal
+                                "sc.nearbyChanStatus", #near dead channels
+                                "ssFull.e5x5/sc.rawEnergy",
+                                "ele.hademTow", #H/E
+                                "rho",
+                                "sc.dEtaSeedSC",
+                                "sc.dPhiSeedSC",
+                                "ssFull.e3x3/sc.rawEnergy",
+                                "ssFull.sigmaIEtaIEta",
+                                "ssFull.sigmaIEtaIPhi",
+                                "ssFull.sigmaIPhiIPhi", #12
+                                "ssFull.eMax/ssFull.e5x5",
+                                "ssFull.e2nd/ssFull.e5x5",
+                                "ssFull.eTop/ssFull.e5x5",
+                                "ssFull.eBottom/ssFull.e5x5",
+                                "ssFull.eLeft/ssFull.e5x5",
+                                "ssFull.eRight/ssFull.e5x5",
+                                "ssFull.e2x5Max/ssFull.e5x5",
+                                "ssFull.e2x5Left/ssFull.e5x5",
+                                "ssFull.e2x5Right/ssFull.e5x5",
+                                "ssFull.e2x5Top/ssFull.e5x5",
+                                "ssFull.e2x5Bottom/ssFull.e5x5",
+                                "ele.nrSatCrys",
+                                "sc.numberOfClusters",
+                                "sc.iEtaOrX",
+                                "sc.iPhiOrY",
+                                "sc.rawESEnergy/sc.rawEnergy"])
+
 
     def set_phoecal_default(self):
         #note photon uses cone based H/E rather than tower based H/E as electrons do
         #also note, photon sigmaIEtaIPhi is different to the rest
         self.target = "mc.energy/(sc.rawEnergy + sc.rawESEnergy)"
-        self.var_eb = ':'.join(["sc.rawEnergy","sc.etaWidth","sc.phiWidth","sc.seedClusEnergy/sc.rawEnergy","ssFull.e5x5/sc.rawEnergy","pho.hademCone",
-                                "rho","sc.dEtaSeedSC","sc.dPhiSeedSC","ssFull.e3x3/sc.rawEnergy","ssFull.sigmaIEtaIEta","phoSSFull.sigmaIEtaIPhi","ssFull.sigmaIPhiIPhi",#12
-                                "ssFull.eMax/ssFull.e5x5","ssFull.e2nd/ssFull.e5x5","ssFull.eTop/ssFull.e5x5","ssFull.eBottom/ssFull.e5x5","ssFull.eLeft/ssFull.e5x5","ssFull.eRight/ssFull.e5x5",
-                                "ssFull.e2x5Max/ssFull.e5x5","ssFull.e2x5Left/ssFull.e5x5","ssFull.e2x5Right/ssFull.e5x5","ssFull.e2x5Top/ssFull.e5x5","ssFull.e2x5Bottom/ssFull.e5x5",
-                                "pho.nrSatCrys","sc.numberOfClusters","sc.iEtaOrX","sc.iPhiOrY","sc.iEtaMod5","sc.iPhiMod2","sc.iEtaMod20","sc.iPhiMod20"])
+	self.var_eb = ':'.join(["sc.rawEnergy",
+                                "sc.etaWidth",
+                                "sc.phiWidth",
+                                "sc.seedClusEnergy/sc.rawEnergy",
+                                "sc.etaGapCode", #near gap in crystal
+                                "sc.phiGapCode", #near gap in crystal
+                                "sc.nearbyChanStatus", #near dead channels
+                                "ssFull.e5x5/sc.rawEnergy",#Testing ssFull.e5x5 for photons
+                                "pho.hademCone",
+                                "rho",
+                                "sc.dEtaSeedSC",
+                                "sc.dPhiSeedSC",
+                                "ssFull.e3x3/sc.rawEnergy",
+                                "ssFull.sigmaIEtaIEta",
+                                "phoSSFull.sigmaIEtaIPhi",
+                                "ssFull.sigmaIPhiIPhi",#12
+                                "ssFull.eMax/ssFull.e5x5",
+                                "ssFull.e2nd/ssFull.e5x5",
+                                "ssFull.eTop/ssFull.e5x5",
+                                "ssFull.eBottom/ssFull.e5x5",
+                                "ssFull.eLeft/ssFull.e5x5",
+                                "ssFull.eRight/ssFull.e5x5",
+                                "ssFull.e2x5Max/ssFull.e5x5",
+                                "ssFull.e2x5Left/ssFull.e5x5",
+                                "ssFull.e2x5Right/ssFull.e5x5",
+                                "ssFull.e2x5Top/ssFull.e5x5",
+                                "ssFull.e2x5Bottom/ssFull.e5x5",
+                                "pho.nrSatCrys",
+                                "sc.numberOfClusters",
+                                "sc.iEtaOrX",
+                                "sc.iPhiOrY",
+                                "sc.iEtaMod5",
+                                "sc.iPhiMod2",
+                                "sc.iEtaMod20",
+                                "sc.iPhiMod20"])
 
-        self.var_ee = ':'.join(["sc.rawEnergy","sc.etaWidth","sc.phiWidth","sc.seedClusEnergy/sc.rawEnergy","ssFull.e5x5/sc.rawEnergy","pho.hademCone", #5
-                                "rho","sc.dEtaSeedSC","sc.dPhiSeedSC","ssFull.e3x3/sc.rawEnergy","ssFull.sigmaIEtaIEta","phoSSFull.sigmaIEtaIPhi","ssFull.sigmaIPhiIPhi", #12
-                                "ssFull.eMax/ssFull.e5x5","ssFull.e2nd/ssFull.e5x5","ssFull.eTop/ssFull.e5x5","ssFull.eBottom/ssFull.e5x5","ssFull.eLeft/ssFull.e5x5","ssFull.eRight/ssFull.e5x5",
-                                "ssFull.e2x5Max/ssFull.e5x5","ssFull.e2x5Left/ssFull.e5x5","ssFull.e2x5Right/ssFull.e5x5","ssFull.e2x5Top/ssFull.e5x5","ssFull.e2x5Bottom/ssFull.e5x5",
-                                "pho.nrSatCrys","sc.numberOfClusters","sc.iEtaOrX","sc.iPhiOrY","sc.rawESEnergy/sc.rawEnergy"])
+	self.var_ee = ':'.join(["sc.rawEnergy",
+                                "sc.etaWidth",
+                                "sc.phiWidth",
+                                "sc.seedClusEnergy/sc.rawEnergy",
+                                "sc.etaGapCode", #near gap in crystal
+                                "sc.phiGapCode", #near gap in crystal
+                                "sc.nearbyChanStatus", #near dead channels
+                                "ssFull.e5x5/sc.rawEnergy",
+                                "pho.hademCone", #5
+                                "rho",
+                                "sc.dEtaSeedSC",
+                                "sc.dPhiSeedSC",
+                                "ssFull.e3x3/sc.rawEnergy",
+                                "ssFull.sigmaIEtaIEta",
+                                "phoSSFull.sigmaIEtaIPhi",
+                                "ssFull.sigmaIPhiIPhi", #12
+                                "ssFull.eMax/ssFull.e5x5",
+                                "ssFull.e2nd/ssFull.e5x5",
+                                "ssFull.eTop/ssFull.e5x5",
+                                "ssFull.eBottom/ssFull.e5x5",
+                                "ssFull.eLeft/ssFull.e5x5",
+                                "ssFull.eRight/ssFull.e5x5",
+                                "ssFull.e2x5Max/ssFull.e5x5",
+                                "ssFull.e2x5Left/ssFull.e5x5",
+                                "ssFull.e2x5Right/ssFull.e5x5",
+                                "ssFull.e2x5Top/ssFull.e5x5",
+                                "ssFull.e2x5Bottom/ssFull.e5x5",
+                                "pho.nrSatCrys",
+                                "sc.numberOfClusters",
+                                "sc.iEtaOrX",
+                                "sc.iPhiOrY",
+                                "sc.rawESEnergy/sc.rawEnergy"])
 
     def set_elecomb_default(self):
-        self.var_eb =":".join(["(sc.rawEnergy+sc.rawESEnergy)*regEcalMean","regEcalSigma/regEcalMean","ele.trkPModeErr/ele.trkPMode","(sc.rawEnergy+sc.rawESEnergy)*regEcalMean/ele.trkPMode","ele.ecalDrivenSeed","ssFull.e3x3/sc.rawEnergy","ele.fbrem","ele.trkEtaMode","ele.trkPhiMode"])
-        self.var_ee =":".join(["(sc.rawEnergy+sc.rawESEnergy)*regEcalMean","regEcalSigma/regEcalMean","ele.trkPModeErr/ele.trkPMode","(sc.rawEnergy+sc.rawESEnergy)*regEcalMean/ele.trkPMode","ele.ecalDrivenSeed","ssFull.e3x3/sc.rawEnergy","ele.fbrem","ele.trkEtaMode","ele.trkPhiMode"])
+        self.var_eb =":".join(["(sc.rawEnergy+sc.rawESEnergy)*regEcalMean",
+				"regEcalSigma/regEcalMean",
+				"ele.trkPModeErr/ele.trkPMode",
+				"(sc.rawEnergy+sc.rawESEnergy)*regEcalMean/ele.trkPMode",
+				"ele.ecalDrivenSeed",
+				"ssFull.e3x3/sc.rawEnergy",
+				"ele.fbrem",
+				"ele.trkEtaMode",
+				"ele.trkPhiMode"])
+        self.var_ee =":".join(["(sc.rawEnergy+sc.rawESEnergy)*regEcalMean",
+				"regEcalSigma/regEcalMean",
+				"ele.trkPModeErr/ele.trkPMode",
+				"(sc.rawEnergy+sc.rawESEnergy)*regEcalMean/ele.trkPMode",
+				"ele.ecalDrivenSeed",
+				"ssFull.e3x3/sc.rawEnergy",
+				"ele.fbrem",
+				"ele.trkEtaMode",
+				"ele.trkPhiMode"])
         self.target = "(mc.energy * (ele.trkPModeErr*ele.trkPModeErr + (sc.rawEnergy+sc.rawESEnergy)*(sc.rawEnergy+sc.rawESEnergy)*regEcalSigma*regEcalSigma) / ( (sc.rawEnergy+sc.rawESEnergy)*regEcalMean*ele.trkPModeErr*ele.trkPModeErr + ele.trkPMode*(sc.rawEnergy+sc.rawESEnergy)*(sc.rawEnergy+sc.rawESEnergy)*regEcalSigma*regEcalSigma ))"
 
     def make_cfg(self):
@@ -127,7 +258,6 @@ Regression.1.FixMean: {args.fix_mean}
         # The way this is written, scram architecture has to be set manually
         # This has to be done here and in the training script in scripts/
         arch = "slc7_amd64_gcc700"
-        #arch = "slc6_amd64_gcc630"
 
         print "starting: {}".format(self.name())
         subprocess.Popen(["bin/"+arch+"/RegressionTrainerExe",self.cfg_name()]).communicate()

@@ -13,7 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description='runs the SC regression trainings')
     parser.add_argument('--era',required=True,help='year to produce for, 2016, 2017, 2018 are the options')
     parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees',help='input directory with the ntuples')
-    parser.add_argument('--output_dir','-o',default="results",help='output dir')
+    parser.add_argument('--output_dir','-o',default="../results/",help='output dir')
     args = parser.parse_args()
 
     #step 1, run calo only regression on the ideal IC to get the mean
@@ -55,7 +55,7 @@ def main():
     regArgs.input_testing = str(input_ideal_ic)
     regArgs.set_sc_default()
     regArgs.cfg_dir = "configs"
-    regArgs.out_dir = args.output_dir
+    regArgs.out_dir = args.output_dir+base_reg_name
     regArgs.cuts_name = cuts_name
     regArgs.base_name = "{}_IdealIC_IdealTraining".format(base_reg_name)
     regArgs.cuts_base = base_ele_cuts.format(extra_cuts = ideal_eventnr_cut)
@@ -86,7 +86,7 @@ steps to be run:
     input_for_res_training = str(regArgs.applied_name()) #save the output name before we change it
     input_for_input_for_res_training = str(input_real_ic)
     
-    if run_step2: subprocess.Popen(["bin/slc6_amd64_gcc700/RegressionApplierExe",input_for_input_for_res_training,input_for_res_training,"--gbrForestFileEE",forest_ee_file,"--gbrForestFileEB",forest_eb_file,"--nrThreads","4","--treeName",regArgs.tree_name,"--writeFullTree","1","--regOutTag","Ideal"]).communicate()
+    if run_step2: subprocess.Popen(["bin/slc7_amd64_gcc700/RegressionApplierExe",input_for_input_for_res_training,input_for_res_training,"--gbrForestFileEE",forest_ee_file,"--gbrForestFileEB",forest_eb_file,"--nrThreads","4","--treeName",regArgs.tree_name,"--writeFullTree","1","--regOutTag","Ideal"]).communicate()
 
     regArgs.base_name = "{}_RealIC_RealTraining".format(base_reg_name)
     regArgs.input_training = input_for_res_training
