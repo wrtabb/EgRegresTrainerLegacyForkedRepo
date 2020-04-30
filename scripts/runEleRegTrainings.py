@@ -27,7 +27,10 @@ def main():
     run_step4 = False
     run_step4_extra = False
     
-    base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && {extra_cuts})"
+    #base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && {extra_cuts})"
+
+    # These cuts are for only training in regions near dead crystals or gaps
+    base_ele_cuts = "(( abs(sc.etaGapCode)==1 ||  abs(sc.phiGapCode)==1 || abs(sc.nearbyChanStatus)==1) && mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && {extra_cuts})"
 
     if args.era=='2016':
         era_name = "2016UL"
@@ -66,7 +69,7 @@ def main():
     regArgs.cuts_base = base_ele_cuts.format(extra_cuts = ideal_eventnr_cut)
     regArgs.cuts_name = "stdCuts"
     regArgs.cfg_dir = "configs"
-    regArgs.out_dir = "../results/2016_StdExt" 
+    regArgs.out_dir = "../results/2016_BadExt" 
     regArgs.ntrees = 1500  
     regArgs.base_name = "regEleEcal{era_name}_IdealIC_IdealTraining".format(era_name=era_name)
     if run_step1: regArgs.run_eb_and_ee()

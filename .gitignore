@@ -12,3 +12,4 @@
 setpaths.txt
 applyRegression.sh
 compilePackage
+.nfs*
