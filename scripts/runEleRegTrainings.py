@@ -29,10 +29,10 @@ def main():
     
     base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && {extra_cuts})"
 
-    if args.era=='2016':
-        era_name = "2016UL"
-        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To300_2016ConditionsFlatPU0to70ECALGT_105X_realistic_IdealEcalIC_v2-v2.root".format(args.input_dir)
-        input_real_ic = "{}/DoubleElectron_FlatPt-1To300_2016ConditionsFlatPU0to70RAW_105X_realistic_v2-v2.root".format(args.input_dir)
+    if args.era=='2021':
+        era_name = "2021"
+        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To100_2021ScenarioFlatPU0to80RAW_106X_mcRun3_2021_realistic_v3-v2_AODSIM.root".format(args.input_dir)
+        input_real_ic = "{}/DoubleElectron_FlatPt-1To100_2021ScenarioFlatPU0to80RAW_106X_mcRun3_2021_realistic_v3-v2_AODSIM.root".format(args.input_dir)
         ideal_eventnr_cut = "evt.eventnr%5==0"
         real_eventnr_cut = "evt.eventnr%5==1"
         ep_eventnr_cut = "evt.eventnr%5==2" 
