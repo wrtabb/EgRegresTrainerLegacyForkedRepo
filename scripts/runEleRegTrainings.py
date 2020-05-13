@@ -8,8 +8,8 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description='runs the SC regression trainings')
-    parser.add_argument('--era',required=True,help='year to produce for, 2016, 2017, 2018 are the options')
-    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/2016UL',help='input directory with the ntuples')
+    parser.add_argument('--era',required=True,help='year to produce for, 2021 is the only option for now')
+    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/RechitThresholdRegres',help='input directory with the ntuples')
     parser.add_argument('--output_dir','-o',default="results",help='output dir')
     args = parser.parse_args()
 
@@ -30,6 +30,7 @@ def main():
     base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && {extra_cuts})"
 
     if args.era=='2021':
+	# This is the baseline regression for testing different thresholds
         era_name = "2021"
         input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To100_2021ScenarioFlatPU0to80RAW_106X_mcRun3_2021_realistic_v3-v2_AODSIM.root".format(args.input_dir)
         input_real_ic = "{}/DoubleElectron_FlatPt-1To100_2021ScenarioFlatPU0to80RAW_106X_mcRun3_2021_realistic_v3-v2_AODSIM.root".format(args.input_dir)
