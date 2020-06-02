@@ -33,7 +33,7 @@ void ResPlotter::Config::setDefaults()
   std::vector<std::pair<std::string,std::string> > varsTree1 = {
     {"invTar","inverse target"},
     {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    {"mean*invTar","corrected SC energy"}
+    {"mean*invTar","corrected"}
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
