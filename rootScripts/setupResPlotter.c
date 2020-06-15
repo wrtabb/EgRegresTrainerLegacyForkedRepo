@@ -7,7 +7,9 @@
   std::vector<double> resBins = {0.005, 0.0075, 0.01, 0.0125, 0.015, 0.0175, 0.02, 0.0225, 0.025, 0.0275, 0.03, 0.0325, 0.035, 0.0375, 0.04, 0.0425, 0.045, 0.0475, 0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.09, 0.1,0.12,0.2,0.4,0.5};
   std::vector<double> etaBinsSC = {0.,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.4442,1.566,1.7,1.8,1.9,2.,2.25,2.5,2.75,3.0};
   std::vector<double> etaBinsPho = {0.,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.4442,1.566,1.7,1.8,1.9,2.,2.25,2.5,2.75,3.0};
-  std::vector<double> etBins = {15,30,50,100,150,300};
+
+  //Et
+  //std::vector<double> etBins = {15,30,50,100,150,300};
   std::vector<double> etBinsPho = {10,20,30,50,100,150,300};
   std::vector<double> etBinsSC = {25,40,50,60};
   std::vector<double> etBinsCoarse = {1,20,60,100,120,160,200,220,260,300};
@@ -15,6 +17,9 @@
   std::vector<double> etBinsHE = {5,300,1000,1500,3000,4000,5000}; 
   std::vector<double> etBinsHEFine = {5,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600,2700,2800,2900,3000,3100,3200,3300,3400,3500,3600,3700,3800,3900,4000,4100,4200,4300,4400,4500,4600,4700,4800,4900,5000}; 
   std::vector<double> etBinsOneBin = {5,5000};
+
+  //Et up to 100
+  std::vector<double> etBins = {0,25,50,75,100};
 
   //mcEnergy Bins
   std::vector<double> mcEBins = {1,500,1000,1500,2000,3500};
@@ -42,15 +47,15 @@
  
   //Directories for making trees
   std::string resultsDirectory = "/home/hep/wrtabb/Egamma/results/";
-  std::string inputDirectory = "/home/hep/wrtabb/Egamma/input_trees/2016UL/";
+  std::string inputDirectory = "/home/hep/wrtabb/Egamma/input_trees/RechitThresholdRegres/";
 
   //2016UL Electrons 
-  std::string resultsEle = resultsDirectory + "2016UL/";
-  std::string step1InputName = "DoubleElectron_FlatPt-1To300_2016ConditionsFlatPU0to70ECALGT_105X_realistic_IdealEcalIC_v2-v2.root";
-  std::string step1Name = "regEleEcal2016UL_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
-  std::string step2Name = "regEleEcal2016UL_RealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root";
-  std::string step3Name = "regEleEcal2016UL_RealIC_RealTraining_stdVar_stdCuts_ntrees1500_applied.root";
-  std::string step4Name = "regEleEcalTrk2016UL_RealIC_stdVar_stdCuts_ntrees1500_applied.root";
+  std::string resultsEle = resultsDirectory + "PFRechit/base/";
+  std::string step1InputName = "DoubleElectron_FlatPt-1To100_2021ScenarioFlatPU0to80RAW_106X_mcRun3_2021_realistic_v3-v2_AODSIM.root";
+  std::string step1Name = "regEleEcalbase_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
+  std::string step2Name = "regEleEcalbase_RealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root";
+  std::string step3Name = "regEleEcalbase_RealIC_RealTraining_stdVar_stdCuts_ntrees1500_applied.root";
+  std::string step4Name = "regEleEcalTrkbase_RealIC_stdVar_stdCuts_ntrees1500_applied.root";
 
  //The result of training on step 4 only includes egRegTreeFriend
  //egRegTree comes from the output of the prevoius step
