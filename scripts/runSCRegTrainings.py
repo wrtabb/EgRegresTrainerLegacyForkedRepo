@@ -11,9 +11,9 @@ import argparse
 def main():  
 
     parser = argparse.ArgumentParser(description='runs the SC regression trainings')
-    parser.add_argument('--era',required=True,help='year to produce for, 2016, 2017, 2018 are the options')
-    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees',help='input directory with the ntuples')
-    parser.add_argument('--output_dir','-o',default="results",help='output dir')
+    parser.add_argument('--tag',required=True,help='year to produce for, 2016, 2017, 2018 are the options')
+    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/RechitThresholdRegres',help='input directory with the ntuples')
+    parser.add_argument('--output_dir','-o',default="../results/PFRechit/",help='output dir')
     args = parser.parse_args()
 
     #step 1, run calo only regression on the ideal IC to get the mean
@@ -28,26 +28,26 @@ def main():
     base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && {extra_cuts})"
     
     #prefixes all the regressions produced
-    if args.era=='2016':
-        base_reg_name = "scReg2016UL"
-        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To300_2016ConditionsFlatPU0to70ECALGT_105X_mcRun2_asymptotic_IdealEcalIC_newSR_v2-v2_AODSIM_EgRegTreeV5.root".format(args.input_dir)
-        input_real_ic = "{}/DoubleElectron_FlatPt-1To300_2016ConditionsFlatPU0to70RAW_105X_mcRun2_asymptotic_newECALSR_v2-v2_AODSIM_EgRegTreeV5.root".format(args.input_dir)    
-        ideal_eventnr_cut = "evt.eventnr%5==0"  #4million electrons
-        real_eventnr_cut = "evt.eventnr%5==1" #4million electrons
-    elif args.era=='2017':
-        base_reg_name = "scReg2017UL"    
-        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To300_2017ConditionsFlatPU0to70ECALGT_105X_mc2017_realistic_IdealEcalIC_v5-v2_AODSIM_EgRegTreeV1_extraVars.root".format(args.input_dir)
-        input_real_ic = "{}/DoubleElectron_FlatPt-1To300_2017ConditionsFlatPU0to70_105X_mc2017_realistic_v5-v2_AODSIM_EgRegTreeV1_4.root".format(args.input_dir)   
-        ideal_eventnr_cut = "evt.eventnr%2==0"
-        real_eventnr_cut = "evt.eventnr%2==0" #events in the ntuple are different so can get away with this
-    elif args.era=='2018':
-        base_reg_name = "scReg2018UL"    
-        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To300_2018ConditionsFlatPU0to70ECALGT_105X_upgrade2018_realistic_IdealEcalIC_v4-v1_AODSIM_EgRegTreeV5_partStatsV2.root".format(args.input_dir)
-        input_real_ic = "{}/DoubleElectron_FlatPt-1To300_2018ConditionsFlatPU0to70RAW_105X_upgrade2018_realistic_v4-v1_AODSIM_EgRegTreeV5_partStatsV2.root".format(args.input_dir)    
-        ideal_eventnr_cut = "evt.eventnr%5==0"  #4million electrons
-        real_eventnr_cut = "evt.eventnr%5==1" #4million electrons
+    if args.tag=='base':
+        tag_name = "base"
+        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To100_2021ScenarioFlatPU0to80RAW_106X_mcRun3_2021_realistic_v3-v2_AODSIM.root".format(args.input_dir)
+        input_real_ic = "{}/DoubleElectron_FlatPt-1To100_2021ScenarioFlatPU0to80RAW_106X_mcRun3_2021_realistic_v3-v2_AODSIM.root".format(args.input_dir)    
+        ideal_eventnr_cut = "evt.eventnr%5==0"
+        real_eventnr_cut = "evt.eventnr%5==1" 
+    elif args.tag=='TL235':
+        tag_name = "TL235"    
+        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL235-8f57d3c1c8cdfa3a81c56bef63445230_USER.root".format(args.input_dir)
+        input_real_ic = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL235-8f57d3c1c8cdfa3a81c56bef63445230_USER.root".format(args.input_dir)   
+        ideal_eventnr_cut = "evt.eventnr%5==0"
+        real_eventnr_cut = "evt.eventnr%5==0" 
+    elif args.tag=='TL180':
+        tag_name = "TL180"    
+        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL180_V1-cb9ba5e110c3cfceb187c9076f92b7eb_USER.root".format(args.input_dir)
+        input_real_ic = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL180_V1-cb9ba5e110c3cfceb187c9076f92b7eb_USER.root".format(args.input_dir)    
+        ideal_eventnr_cut = "evt.eventnr%5==0"
+        real_eventnr_cut = "evt.eventnr%5==1" 
     else:
-        raise ValueError("era {} is invalid, options are 2016/2017/2018".format(era))
+        raise ValueError("tag {} is invalid, options are base, TL235, or TL180".format(tag))
 
     
     regArgs = RegArgs()
@@ -55,9 +55,9 @@ def main():
     regArgs.input_testing = str(input_ideal_ic)
     regArgs.set_sc_default()
     regArgs.cfg_dir = "configs"
-    regArgs.out_dir = args.output_dir
+    regArgs.out_dir = args.output_dir+tag_name
     regArgs.cuts_name = cuts_name
-    regArgs.base_name = "{}_IdealIC_IdealTraining".format(base_reg_name)
+    regArgs.base_name = "{}_IdealIC_IdealTraining".format(tag_name)
     regArgs.cuts_base = base_ele_cuts.format(extra_cuts = ideal_eventnr_cut)
     regArgs.ntrees = 1500
  
@@ -69,7 +69,7 @@ def main():
 steps to be run:
     step 1: ideal training for mean       = {step1}
     step 2: apply ideal training to real  = {step2}
-    step 3: real training for sigma       = {step3}""".format(name=base_reg_name,ideal_ic=input_ideal_ic,real_ic=input_real_ic,out_dir=args.output_dir,step1=run_step1,step2=run_step2,step3=run_step3)
+    step 3: real training for sigma       = {step3}""".format(name=tag_name,ideal_ic=input_ideal_ic,real_ic=input_real_ic,out_dir=args.output_dir,step1=run_step1,step2=run_step2,step3=run_step3)
     time.sleep(20)
 
     if not os.path.exists(args.output_dir):
@@ -82,13 +82,13 @@ steps to be run:
     regArgs.do_eb = False
     forest_ee_file = regArgs.output_name()
 
-    regArgs.base_name = "{}_RealIC_IdealTraining".format(base_reg_name)
+    regArgs.base_name = "{}_RealIC_IdealTraining".format(tag_name)
     input_for_res_training = str(regArgs.applied_name()) #save the output name before we change it
     input_for_input_for_res_training = str(input_real_ic)
     
-    if run_step2: subprocess.Popen(["bin/slc6_amd64_gcc700/RegressionApplierExe",input_for_input_for_res_training,input_for_res_training,"--gbrForestFileEE",forest_ee_file,"--gbrForestFileEB",forest_eb_file,"--nrThreads","4","--treeName",regArgs.tree_name,"--writeFullTree","1","--regOutTag","Ideal"]).communicate()
+    if run_step2: subprocess.Popen(["bin/slc7_amd64_gcc700/RegressionApplierExe",input_for_input_for_res_training,input_for_res_training,"--gbrForestFileEE",forest_ee_file,"--gbrForestFileEB",forest_eb_file,"--nrThreads","4","--treeName",regArgs.tree_name,"--writeFullTree","1","--regOutTag","Ideal"]).communicate()
 
-    regArgs.base_name = "{}_RealIC_RealTraining".format(base_reg_name)
+    regArgs.base_name = "{}_RealIC_RealTraining".format(tag_name)
     regArgs.input_training = input_for_res_training
     regArgs.input_testing = input_for_res_training
     regArgs.target = "mc.energy/(sc.rawEnergy*regIdealMean)"

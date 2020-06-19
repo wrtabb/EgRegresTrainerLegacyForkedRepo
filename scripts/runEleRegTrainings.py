@@ -8,9 +8,9 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description='runs the SC regression trainings')
-    parser.add_argument('--tag',required=True,help='rechit tag; base or 34sigma for now')
+    parser.add_argument('--tag',required=True,help='rechit tag; base or TL235 for now')
     parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/RechitThresholdRegres',help='input directory with the ntuples')
-    parser.add_argument('--output_dir','-o',default="results",help='output dir')
+    parser.add_argument('--output_dir','-o',default="../results/PFRechit/",help='output dir')
     args = parser.parse_args()
 
     #step 1, run calo only regression on the ideal IC to get the mean
@@ -38,22 +38,22 @@ def main():
         real_eventnr_cut = "evt.eventnr%5==1"
         ep_eventnr_cut = "evt.eventnr%5==2" 
 
-    elif args.tag=='34sigma':
-        tag_name = "34sigma"
+    elif args.tag=='TL235':
+        tag_name = "TL235"
         input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL235-8f57d3c1c8cdfa3a81c56bef63445230_USER.root".format(args.input_dir)
         input_real_ic = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL235-8f57d3c1c8cdfa3a81c56bef63445230_USER.root".format(args.input_dir)
         ideal_eventnr_cut = "evt.eventnr%5==0"  #2million electrons
         real_eventnr_cut = "evt.eventnr%5==1" #2million electron
         ep_eventnr_cut = "evt.eventnr%5==2" #2million electrons
-    elif args.tag=='2018':
-        tag_name = "2018UL"
-        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To300_2018ConditionsFlatPU0to70ECALGT_105X_upgrade2018_realistic_IdealEcalIC_v4-v1_AODSIM_EgRegTreeV5Refined.root".format(args.input_dir)
-        input_real_ic = "{}/DoubleElectron_FlatPt-1To300_2018ConditionsFlatPU0to70RAW_105X_upgrade2018_realistic_v4-v1_AODSIM_EgRegTreeV5Refined.root".format(args.input_dir)    
+    elif args.tag=='TL180':
+        tag_name = "TL180"
+        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL180_V1-cb9ba5e110c3cfceb187c9076f92b7eb_USER.root".format(args.input_dir)
+        input_real_ic = "{}/DoubleElectron_FlatPt-1To100_crab_DoubleEle_FlatPt-1To100_Run3_GENSIM_34sigma_TL180_V1-cb9ba5e110c3cfceb187c9076f92b7eb_USER.root".format(args.input_dir)    
         ideal_eventnr_cut = "evt.eventnr%5==0"  #4million electrons (we determined 4 million was optimal but after the 2017 was done)
         real_eventnr_cut = "evt.eventnr%5==1" #4million electrons (we determined 4 million was optimal but after the 2017 was done)
         ep_eventnr_cut = "evt.eventnr%5==2" #4million electrons (we determined 4 million was optimal but after the 2017 was done)
     else:
-        raise ValueError("tag {} is invalid, options are base, 34sigma".format(tag))
+        raise ValueError("tag {} is invalid, options are base, TL235, or TL180".format(tag))
 
 
     
@@ -68,7 +68,7 @@ def main():
     regArgs.cuts_base = base_ele_cuts.format(extra_cuts = ideal_eventnr_cut)
     regArgs.cuts_name = "stdCuts"
     regArgs.cfg_dir = "configs"
-    regArgs.out_dir = "../results/PFRechit/"+tag_name 
+    regArgs.out_dir = args.output_dir+tag_name 
     regArgs.ntrees = 1500  
     regArgs.base_name = "regEleEcal{tag_name}_IdealIC_IdealTraining".format(tag_name=tag_name)
     if run_step1: regArgs.run_eb_and_ee()
