@@ -70,7 +70,7 @@ def main():
     regArgs.cfg_dir = "configs"
     regArgs.out_dir = args.output_dir+tag_name 
     regArgs.ntrees = 1500  
-    regArgs.base_name = "regEleEcal{tag_name}_IdealIC_IdealTraining".format(tag_name=tag_name)
+    regArgs.base_name = "regEleEcal_{tag_name}_IdealIC_IdealTraining".format(tag_name=tag_name)
     if run_step1: regArgs.run_eb_and_ee()
     
     #step2 now we run over the REAL intercalibration constant data and make a rew tree with this regression included
@@ -80,13 +80,13 @@ def main():
     regArgs.do_eb = False
     forest_ee_file = regArgs.output_name()
 
-    regArgs.base_name = "regEleEcal{tag_name}_RealIC_IdealTraining".format(tag_name=tag_name)
+    regArgs.base_name = "regEleEcal_{tag_name}_RealIC_IdealTraining".format(tag_name=tag_name)
     input_for_res_training = str(regArgs.applied_name()) #save the output name before we change it
     if run_step2: subprocess.Popen(["bin/slc7_amd64_gcc700/RegressionApplierExe",input_real_ic,input_for_res_training,"--gbrForestFileEE",forest_ee_file,"--gbrForestFileEB",forest_eb_file,"--nrThreads","4","--treeName",regArgs.tree_name,"--writeFullTree","1","--regOutTag","Ideal"]).communicate()
     
     #step3 we now run over re-train with the REAL sample for the sigma, changing the target to have the correction applied 
     print "starting step3"
-    regArgs.base_name = "regEleEcal{tag_name}_RealIC_RealTraining".format(tag_name=tag_name)
+    regArgs.base_name = "regEleEcal_{tag_name}_RealIC_RealTraining".format(tag_name=tag_name)
     regArgs.input_training = input_for_res_training
     regArgs.input_testing = input_for_res_training
     regArgs.target = "mc.energy/((sc.rawEnergy+sc.rawESEnergy)*regIdealMean)"
@@ -102,7 +102,7 @@ def main():
     print "starting step4"
     input_for_comb = str(regArgs.applied_name())
 
-    regArgs.base_name = "regEleEcalTrk{tag_name}_RealIC".format(tag_name=tag_name)
+    regArgs.base_name = "regEleEcalTrk_{tag_name}_RealIC".format(tag_name=tag_name)
     regArgs.var_eb =":".join(["(sc.rawEnergy+sc.rawESEnergy)*regIdealMean","regRealSigma/regIdealMean","ele.trkPModeErr/ele.trkPMode","(sc.rawEnergy+sc.rawESEnergy)*regIdealMean/ele.trkPMode","ele.ecalDrivenSeed","ssFull.e3x3/sc.rawEnergy","ele.fbrem","ele.trkEtaMode","ele.trkPhiMode"])
     regArgs.var_ee =":".join(["(sc.rawEnergy+sc.rawESEnergy)*regIdealMean","regRealSigma/regIdealMean","ele.trkPModeErr/ele.trkPMode","(sc.rawEnergy+sc.rawESEnergy)*regIdealMean/ele.trkPMode","ele.ecalDrivenSeed","ssFull.e3x3/sc.rawEnergy","ele.fbrem","ele.trkEtaMode","ele.trkPhiMode"])
     regArgs.target = "(mc.energy * (ele.trkPModeErr*ele.trkPModeErr + (sc.rawEnergy+sc.rawESEnergy)*(sc.rawEnergy+sc.rawESEnergy)*regRealSigma*regRealSigma) / ( (sc.rawEnergy+sc.rawESEnergy)*regIdealMean*ele.trkPModeErr*ele.trkPModeErr + ele.trkPMode*(sc.rawEnergy+sc.rawESEnergy)*(sc.rawEnergy+sc.rawESEnergy)*regRealSigma*regRealSigma ))"
@@ -116,18 +116,18 @@ def main():
         regArgs.run_eb_and_ee()
     if run_step4_extra:
         #first run low pt
-        regArgs.base_name = "regEleEcalTrkLowPt{tag_name}_RealIC".format(tag_name=tag_name)
+        regArgs.base_name = "regEleEcalTrkLowPt_{tag_name}_RealIC".format(tag_name=tag_name)
         regArgs.cuts_base = base_ele_cuts.format(extra_cuts = "{eventnr_cut} && mc.pt<50".format(eventnr_cut=ep_eventnr_cut))
         forest_eb,forest_ee = regArgs.forest_filenames()
         regArgs.run_eb_and_ee()
 
         #now run high pt
-        regArgs.base_name = "regEleEcalTrkHighPt{tag_name}_RealIC".format(tag_name=tag_name)
+        regArgs.base_name = "regEleEcalTrkHighPt_{tag_name}_RealIC".format(tag_name=tag_name)
         regArgs.cuts_base = base_ele_cuts.format(extra_cuts = "{eventnr_cut} && mc.pt>=50 && mc.pt<200".format(eventnr_cut=ep_eventnr_cut))
         forest_eb_highpt,forest_ee_highpt = regArgs.forest_filenames()
         regArgs.run_eb_and_ee()
 
-        regArgs.base_name = "regEleEcalTrkLowHighPt{tag_name}_RealIC".format(tag_name=tag_name)
+        regArgs.base_name = "regEleEcalTrkLowHighPt_{tag_name}_RealIC".format(tag_name=tag_name)
         subprocess.Popen(["bin/slc7_amd64_gcc700/RegressionApplierExe",regArgs.input_testing,regArgs.applied_name(),"--gbrForestFileEB",forest_eb,"--gbrForestFileEE",forest_ee,"--gbrForestFileEBHighEt",forest_eb_highpt,"--gbrForestFileEEHighEt",forest_ee_highpt,"--highEtThres","50.","--nrThreads","4","--treeName",regArgs.tree_name,"--writeFullTree","0"]).communicate()
     
         

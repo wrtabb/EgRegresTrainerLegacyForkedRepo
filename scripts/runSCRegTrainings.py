@@ -57,7 +57,7 @@ def main():
     regArgs.cfg_dir = "configs"
     regArgs.out_dir = args.output_dir+tag_name
     regArgs.cuts_name = cuts_name
-    regArgs.base_name = "{}_IdealIC_IdealTraining".format(tag_name)
+    regArgs.base_name = "regSC_{}_IdealIC_IdealTraining".format(tag_name)
     regArgs.cuts_base = base_ele_cuts.format(extra_cuts = ideal_eventnr_cut)
     regArgs.ntrees = 1500
  
@@ -82,13 +82,13 @@ steps to be run:
     regArgs.do_eb = False
     forest_ee_file = regArgs.output_name()
 
-    regArgs.base_name = "{}_RealIC_IdealTraining".format(tag_name)
+    regArgs.base_name = "regSC_{}_RealIC_IdealTraining".format(tag_name)
     input_for_res_training = str(regArgs.applied_name()) #save the output name before we change it
     input_for_input_for_res_training = str(input_real_ic)
     
     if run_step2: subprocess.Popen(["bin/slc7_amd64_gcc700/RegressionApplierExe",input_for_input_for_res_training,input_for_res_training,"--gbrForestFileEE",forest_ee_file,"--gbrForestFileEB",forest_eb_file,"--nrThreads","4","--treeName",regArgs.tree_name,"--writeFullTree","1","--regOutTag","Ideal"]).communicate()
 
-    regArgs.base_name = "{}_RealIC_RealTraining".format(tag_name)
+    regArgs.base_name = "regSC_{}_RealIC_RealTraining".format(tag_name)
     regArgs.input_training = input_for_res_training
     regArgs.input_testing = input_for_res_training
     regArgs.target = "mc.energy/(sc.rawEnergy*regIdealMean)"
