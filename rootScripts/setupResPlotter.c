@@ -1,13 +1,13 @@
 {
   //binning
-  std::vector<double> ptOneBin{1,300};
+  std::vector<double> ptOneBin{5,300};
   std::vector<double> puBins = {0,5,10,15,20,25,30,35,40,45,50,55,60,65,70};
   std::vector<double> eBins= {0,3500};
   std::vector<double> puOneBin = {0,70};
   std::vector<double> resBins = {0.005, 0.0075, 0.01, 0.0125, 0.015, 0.0175, 0.02, 0.0225, 0.025, 0.0275, 0.03, 0.0325, 0.035, 0.0375, 0.04, 0.0425, 0.045, 0.0475, 0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.09, 0.1,0.12,0.2,0.4,0.5};
   std::vector<double> etaBinsSC = {0.,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.4442,1.566,1.7,1.8,1.9,2.,2.25,2.5,2.75,3.0};
   std::vector<double> etaBinsPho = {0.,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.4442,1.566,1.7,1.8,1.9,2.,2.25,2.5,2.75,3.0};
-  std::vector<double> etBins = {1,5,10,15,30,50,100,150,300};
+  std::vector<double> etBins = {5,10,15,30,50,100,150,300};
   std::vector<double> etBinsPho = {10,20,30,50,100,150,300};
   std::vector<double> etBinsSC = {25,40,50,60};
   std::vector<double> etBinsCoarse = {1,20,60,100,120,160,200,220,260,300};
