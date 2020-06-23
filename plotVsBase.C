@@ -17,7 +17,7 @@ void plotVsBase()
  gROOT->ProcessLine("gROOT->SetBatch(true)");
  gROOT->ProcessLine(".x rootScripts/setupBaseComparison.c");
 
- plot(etaPlot,puPlot,ePlot,dcbFit);
+ //plot(etaPlot,puPlot,ePlot,dcbFit);
 }
 
 void plot(bool etaPlot, bool puPlot, bool ePlot,bool dcbFit)
