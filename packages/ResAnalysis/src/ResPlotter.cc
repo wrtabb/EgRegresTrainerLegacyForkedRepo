@@ -34,12 +34,12 @@ void ResPlotter::Config::setDefaults()
     {"invTar","inverse target"},
     {"mc.energy/(sc.rawEnergy+sc.rawESEnergy)","uncorrected SC energy"},
     {"1.0/(mean*invTar)","corrected SC energy"},
-    {"1.0/(mean*invTar)","2021 base threshold"}
+    {"(mean*invTar)","2021 base threshold"}
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
     {"1.0/(mean*invTar)","E-p combination"},
-    {"1.0/(mean*invTar)","EcalPFRecHitThresholds_34sigma_TL235"}
+    {"(mean*invTar)","TL235"}
   };
 
   vars.clear();
