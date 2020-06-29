@@ -25,26 +25,25 @@ void ResPlotter::Config::setDefaults()
   fitMaxHigh = 1.1;
   fitHighThres = 50;
 
-  normalise = true;
+  normalise = false;
 
   binLabelPrecision = 3;
   divideMeanBySigma = true;
 
   std::vector<std::pair<std::string,std::string> > varsTree1 = {
-    {"invTar","inverse target"},
-    {"mc.energy/(sc.rawEnergy+sc.rawESEnergy)","uncorrected SC energy"},
-    {"1.0/(mean*invTar)","corrected SC energy"},
     {"(mean*invTar)","2021 base threshold"}
   };
-
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
-    {"1.0/(mean*invTar)","E-p combination"},
+    {"(mean*invTar)","TL180"}
+  };
+  std::vector<std::pair<std::string,std::string> > varsTree3 = {
     {"(mean*invTar)","TL235"}
   };
 
   vars.clear();
   vars.push_back(varsTree1);
   vars.push_back(varsTree2);
+  vars.push_back(varsTree3);
 }
 
 void ResPlotter::VarNameData::autoFill()
