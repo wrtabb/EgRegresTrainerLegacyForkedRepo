@@ -33,14 +33,12 @@ void ResPlotter::Config::setDefaults()
   std::vector<std::pair<std::string,std::string> > varsTree1 = {
     {"invTar","inverse target"},
     {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    //{"mean*invTar","step 3 corrected"},
-    {"( (sc.rawEnergy+sc.rawESEnergy)*regIdealMean<200 && (sc.rawEnergy+sc.rawESEnergy)*regIdealMean/ele.trkPMode>0.025 && ele.trkPModeErr<10*ele.trkPMode && abs((sc.rawEnergy+sc.rawESEnergy)*regIdealMean-ele.trkPMode) < 15*sqrt((ele.trkPModeErr)*(ele.trkPModeErr)+((sc.rawEnergy+sc.rawESEnergy)*regIdealMean)*(sc.rawEnergy+sc.rawESEnergy)*regIdealMean*regRealSigma*regRealSigma) )*(mean*invTar)+( (!( (sc.rawEnergy+sc.rawESEnergy)*regIdealMean<200 && (sc.rawEnergy+sc.rawESEnergy)*regIdealMean/ele.trkPMode>0.025 && ele.trkPModeErr<10*ele.trkPMode && abs((sc.rawEnergy+sc.rawESEnergy)*regIdealMean-ele.trkPMode) < 15*sqrt((ele.trkPModeErr)*(ele.trkPModeErr)+((sc.rawEnergy+sc.rawESEnergy)*regIdealMean)*(sc.rawEnergy+sc.rawESEnergy)*regIdealMean*regRealSigma*regRealSigma)) )*(regIdealMean*(sc.rawEnergy+sc.rawESEnergy)/mc.energy)) ","step 3 corrected"},
+    {"mean*invTar","step 3 corrected"},
     {"invTar","uncorrected"}
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
-//    {"mean*invTar","E-p combination"},
-    {"( (sc.rawEnergy+sc.rawESEnergy)*regIdealMean<200 && (sc.rawEnergy+sc.rawESEnergy)*regIdealMean/ele.trkPMode>0.025 && ele.trkPModeErr<10*ele.trkPMode && abs((sc.rawEnergy+sc.rawESEnergy)*regIdealMean-ele.trkPMode) < 15*sqrt((ele.trkPModeErr)*(ele.trkPModeErr)+((sc.rawEnergy+sc.rawESEnergy)*regIdealMean)*(sc.rawEnergy+sc.rawESEnergy)*regIdealMean*regRealSigma*regRealSigma) )*(mean*invTar)+( (!( (sc.rawEnergy+sc.rawESEnergy)*regIdealMean<200 && (sc.rawEnergy+sc.rawESEnergy)*regIdealMean/ele.trkPMode>0.025 && ele.trkPModeErr<10*ele.trkPMode && abs((sc.rawEnergy+sc.rawESEnergy)*regIdealMean-ele.trkPMode) < 15*sqrt((ele.trkPModeErr)*(ele.trkPModeErr)+((sc.rawEnergy+sc.rawESEnergy)*regIdealMean)*(sc.rawEnergy+sc.rawESEnergy)*regIdealMean*regRealSigma*regRealSigma)) )*(regIdealMean*(sc.rawEnergy+sc.rawESEnergy)/mc.energy)) ","E-p combination"},
+    {"mean*invTar","E-p combination"},
     {"ele.trkPMode/mc.energy","track p_{T}/true energy"}
   };
 
