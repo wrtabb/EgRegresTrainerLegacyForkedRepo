@@ -12,7 +12,7 @@ void resECALvsTrkPlot()
  gSystem->Exec("gmake RegressionApplierExe -j 8");
 
  gROOT->ProcessLine("gROOT->SetBatch(true)");
- gROOT->ProcessLine(".x rootScripts/setupResPlotter2018UL.c");
+ gROOT->ProcessLine(".x rootScripts/setupResPlotter.c");
 
  plot(plotEt,plotEta,dcbFit);
 }
@@ -24,15 +24,15 @@ void plot(bool etPlot,bool etaPlot,bool dcbFit)
 
  if(etPlot){
   gROOT->ProcessLine("res.makeHists({treeEleStep3,treeEleStep4},\"Barrel\",\"abs(sc.seedEta)<1.442 && mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && eventnr%5>=3\",\"mc.pt\",\"mc.pt\",ptOneBin,etBins)");
-  gROOT->ProcessLine("res.printFits({2,4,5},\"../plots/resECALvsTrk_2018UL_v2/Et_EB_\")");
+  gROOT->ProcessLine("res.printFits({2,4,5},\"../plots/resECALvsTrk_v4/Et_EB_\")");
 
   gROOT->ProcessLine("res.makeHists({treeEleStep3,treeEleStep4},\"Endcap\",\"abs(sc.seedEta)>1.566 && mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && eventnr%5>=3\",\"mc.pt\",\"mc.pt\",ptOneBin,etBins)");
-  gROOT->ProcessLine("res.printFits({2,4,5},\"../plots/resECALvsTrk_2018UL_v2/Et_EE_\")");
+  gROOT->ProcessLine("res.printFits({2,4,5},\"../plots/resECALvsTrk_v4/Et_EE_\")");
  }//end etPlot
 
  if(etaPlot){
   gROOT->ProcessLine("res.makeHists({treeEleStep3,treeEleStep4},\"\",\"mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && ele.et>0 && eventnr%5>=3\",\"mc.pt\",\"abs(sc.seedEta)\",etBins32AndUp,absEtaBins)");
-  gROOT->ProcessLine("res.printFits({2,4,5},\"../plots/resECALvsTrk_2018UL_v2/Eta_\")");
+  gROOT->ProcessLine("res.printFits({2,4,5},\"../plots/resECALvsTrk_v4/Eta_\")");
  }//end etaPlot
 
 
