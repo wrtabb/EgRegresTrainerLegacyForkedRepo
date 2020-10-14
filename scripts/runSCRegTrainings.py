@@ -19,7 +19,10 @@ def main():
     #setup the selection (event number cuts come later)
     cuts_name = "stdCuts" 
     base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && {extra_cuts})"
-    
+    run_step1 = True
+    run_step2 = False
+    run_step3 = False
+
     #prefixes all the regressions produced
     if args.era=='2016':
         base_reg_name = "scReg2016UL"
