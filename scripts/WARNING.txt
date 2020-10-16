@@ -1,0 +1,2 @@
+
+I just realized I made changes to the photon training script at one point for a specific study and I did it in this branch instead of a separate one. So the training script for photons here only has step 1. I'm not fixing it right now, but this notice is here to remind to revert back to the photon training with three steps.
