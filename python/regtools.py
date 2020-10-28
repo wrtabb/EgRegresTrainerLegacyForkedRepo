@@ -12,6 +12,7 @@ class RegArgs:
         self.cfg_dir = "configs"
         self.out_dir = "results" 
         self.tree_name = "egRegTreeMixed"
+#        self.tree_name = "egRegTree34Sigma"
         self.write_full_tree = "0"
         self.reg_out_tag = ""
         self.min_events = 300

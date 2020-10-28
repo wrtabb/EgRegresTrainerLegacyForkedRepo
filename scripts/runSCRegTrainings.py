@@ -27,21 +27,23 @@ def main():
     cuts_name = "stdCuts" 
     base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && {extra_cuts})"
     
-    #prefixes all the regressions produced
+    # Splitting samples 60/40 for training then testing
+    # 3 million training sample
+    # 2 million testing sample
     if args.tag=='TL150':
         base_reg_name = "scRegTL150"
         input_ideal_ic  = "{}/TL150/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL150_106X_mcRun3_TL150fb_realistic_v1_ext1-v1_EGRegNtups.root".format(args.input_dir)
-        ideal_eventnr_cut = "evt.eventnr%2==0"
-#    elif args.tag=='TL180':
-#        base_reg_name = "scRegTL180"    
-#        input_ideal_ic  = "{}/TL180/".format(args.input_dir)
-#        ideal_eventnr_cut = "evt.eventnr%2==0"
+        ideal_eventnr_cut = "evt.eventnr%5 < 3" 
+    elif args.tag=='TL180':
+        base_reg_name = "scRegTL180"    
+        input_ideal_ic  = "{}/TL180/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL180_106X_mcRun3_TL180fb_realistic_v1_ext1-v1_EGRegNtups.root".format(args.input_dir)
+        ideal_eventnr_cut = "evt.eventnr%5 < 3"
     elif args.tag=='TL235':
         base_reg_name = "scRegTL235"    
         input_ideal_ic  = "{}/TL235/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL235_106X_mcRun3_TL235fb_realistic_v1_ext1-v1_EGRegNtups.root".format(args.input_dir)
-        ideal_eventnr_cut = "evt.eventnr%2==0"  
+        ideal_eventnr_cut = "evt.eventnr%5 <3"  
     else:
-        raise ValueError("tag {} is invalid, options are TL150 or TL235. TL180 coming soon".format(tag))
+        raise ValueError("tag {} is invalid, options are TL150, TL180,  or TL235".format(tag))
 
     
     regArgs = RegArgs()
