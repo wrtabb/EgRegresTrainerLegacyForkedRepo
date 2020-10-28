@@ -1,7 +1,7 @@
 
 void plot(bool etaPlot, bool puPlot, bool ePlot, bool dcbFit);
 
-void plot2016Ele()
+void makePlots()
 {
  //-----parameters-----//
  //Which plots to plot
@@ -26,8 +26,8 @@ void plot(bool etaPlot, bool puPlot, bool ePlot,bool dcbFit)
  if(dcbFit) gROOT->ProcessLine("res.setFitType(ResFitter::FitType::DCB)");
  //Eta
  if(etaPlot){
-  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,nullptr},\"\",\"mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && eventnr%5>=3\",\"mc.pt\",\"sc.seedEta\",etBins,etaBins2p5)");
-  gROOT->ProcessLine("res.printFits({1,2},\"../plots/ThreshForECAL/Eta_\")");
+  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,nullptr},\"\",\"mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && eventnr%5>=3\",\"mc.pt\",\"sc.seedEta\",etBins,etaBins)");
+  gROOT->ProcessLine("res.printFits({1,2},\"../plots/ThreshForECAL/TL150Mixed/Eta_\")");
  }
 /*
  //Pileup
