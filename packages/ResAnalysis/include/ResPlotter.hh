@@ -162,6 +162,7 @@ private:
   //formatting and utility functions
   void formatTwoComp(TGraph* graph,TPaveLabel* vsVar1Label,TPaveLabel* infoLabel,bool isMean=false)const;
   void formatThreeComp(TGraph* graph,TPaveLabel* vsVar1Label,TPaveLabel* infoLabel,bool isMean=false)const;
+  void formatFourComp(TGraph* graph,TPaveLabel* vsVar1Label,TPaveLabel* infoLabel,bool isMean=false)const;
   static TGraph* makeRatio(TGraph* numer,TGraph* denom);
   static int getColour(unsigned int colourNr);
   static int getMarkerStyle(unsigned int markerNr);

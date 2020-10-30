@@ -15,13 +15,40 @@
   std::string resultsDirectory = "/home/hep/wrtabb/Egamma/results/ThreshForECAL/";
   std::string inputDirectory = "/home/hep/wrtabb/Egamma/input_trees/ThreshForECAL/";
 
-  //root file names 
+  //Tree names
+  std::string treeMixedName = "egRegTreeMixed";
+  std::string treeMixedFriendName = "egRegTreeMixedFriend";
+  std::string treeName = "egRegTree34Sigma";
+  std::string treeFriendName = "egRegTree34SigmaFriend";
+  
+  //TL150 Mixed 
   std::string TL150MixedName_Results = "scRegTL150_Mixed_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
   std::string TL150MixedName_Input = "TL150/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL150_106X_mcRun3_TL150fb_realistic_v1_ext1-v1_EGRegNtups.root"; 
+  TTree*treeTL150_Mixed = HistFuncs::makeChain(treeMixedName,inputDirectory+TL150MixedName_Input,1,1,1);
+  TTree*treeTL150_MixedFriend = HistFuncs::makeChain(treeMixedFriendName,resultsDirectory+TL150MixedName_Results,1,1,1);
+  treeTL150_Mixed->AddFriend(treeTL150_MixedFriend); 
 
- TTree*treeTL150_Mixed = HistFuncs::makeChain("egRegTreeMixed",inputDirectory+TL150MixedName_Input,1,1,1);
- TTree*treeTL150_MixedFriend = HistFuncs::makeChain("egRegTreeMixedFriend",resultsDirectory+TL150MixedName_Results,1,1,1);
- treeTL150_Mixed->AddFriend(treeTL150_MixedFriend); 
+  //TL150 
+  std::string TL150Name_Results = "scRegTL150_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
+  std::string TL150Name_Input = "TL150/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL150_106X_mcRun3_TL150fb_realistic_v1_ext1-v1_EGRegNtups.root"; 
+  TTree*treeTL150 = HistFuncs::makeChain(treeName,inputDirectory+TL150Name_Input,1,1,1);
+  TTree*treeTL150Friend = HistFuncs::makeChain(treeFriendName,resultsDirectory+TL150Name_Results,1,1,1);
+  treeTL150->AddFriend(treeTL150Friend); 
+
+  //TL180
+  std::string TL180Name_Results = "scRegTL180_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
+  std::string TL180Name_Input = "TL180/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL180_106X_mcRun3_TL180fb_realistic_v1_ext1-v1_EGRegNtups.root"; 
+  TTree*treeTL180 = HistFuncs::makeChain(treeName,inputDirectory+TL180Name_Input,1,1,1);
+  TTree*treeTL180Friend = HistFuncs::makeChain(treeFriendName,resultsDirectory+TL180Name_Results,1,1,1);
+  treeTL180->AddFriend(treeTL180Friend); 
+
+  //TL235
+  std::string TL235Name_Results = "scRegTL235_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
+  std::string TL235Name_Input = "TL235/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL235_106X_mcRun3_TL235fb_realistic_v1_ext1-v1_EGRegNtups.root"; 
+  TTree*treeTL235 = HistFuncs::makeChain(treeName,inputDirectory+TL235Name_Input,1,1,1);
+  TTree*treeTL235Friend = HistFuncs::makeChain(treeFriendName,resultsDirectory+TL235Name_Results,1,1,1);
+  treeTL235->AddFriend(treeTL235Friend); 
+
 
 
 

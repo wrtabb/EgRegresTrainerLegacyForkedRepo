@@ -33,16 +33,32 @@ void ResPlotter::Config::setDefaults()
   std::vector<std::pair<std::string,std::string> > varsTree1 = {
     {"invTar","inverse target"},
     {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    {"mean*invTar","corrected SC energy"}
+    {"mean*invTar","ThrMixed"}
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
-    {"mean*invTar","E-p combination"}
+    {"invTar","inverse target"},
+    {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
+    {"mean*invTar","ThrTL150"}
+  };
+
+  std::vector<std::pair<std::string,std::string> > varsTree3 = {
+    {"invTar","inverse target"},
+    {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
+    {"mean*invTar","ThrTL180"}
+  };
+
+  std::vector<std::pair<std::string,std::string> > varsTree4 = {
+    {"invTar","inverse target"},
+    {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
+    {"mean*invTar","ThrTL235"}
   };
 
   vars.clear();
   vars.push_back(varsTree1);
   vars.push_back(varsTree2);
+  vars.push_back(varsTree3);
+  vars.push_back(varsTree4);
 }
 
 void ResPlotter::VarNameData::autoFill()
@@ -148,8 +164,9 @@ ResPlotter::makeHists(TTree* tree,const std::vector<std::pair<std::string,std::s
 void ResPlotter::printFits(const std::vector<int>& histNrs,const std::string& baseOutName)const
 {
   bool twoComp = histNrs.size()==2;  
-  if(histNrs.size()!=2 && histNrs.size()!=3){
-    LogErr << "Error, number of selected histograms must be either 2 or 3, not "<<histNrs.size()<<std::endl;
+  bool threeComp = histNrs.size()==2;
+  if(histNrs.size()!=2 && histNrs.size()!=3 && histNrs.size()!=4){
+    LogErr << "Error, number of selected histograms must be either 2, 3, or 4, not "<<histNrs.size()<<std::endl;
     return;
   }
   auto vsVar1Label = HistFuncs::makeLabel("",0.657016,0.30662,0.9098,0.374564);
@@ -191,12 +208,14 @@ void ResPlotter::printFits(const std::vector<int>& histNrs,const std::string& ba
     //now we plot the fit params vs the variable of interets
     auto graphSigma = plotFitParamsVsVarComp(fitParams,ResFitter::ValType::Sigma,cfg_.divideMeanBySigma);
     if(twoComp) formatTwoComp(graphSigma,vsVar1Label,idealLabel);
-    else formatThreeComp(graphSigma,vsVar1Label,idealLabel);
+    else if(threeComp) formatThreeComp(graphSigma,vsVar1Label,idealLabel);
+    else formatFourComp(graphSigma,vsVar1Label,idealLabel);
     if(!baseOutName.empty()) HistFuncs::print(outNameSigma,"c1",true);
     
     auto graphMean = plotFitParamsVsVarComp(fitParams,ResFitter::ValType::Mean);
     if(twoComp) formatTwoComp(graphMean,vsVar1Label,idealLabel,true);
-    else formatThreeComp(graphMean,vsVar1Label,idealLabel,true);
+    else if(threeComp) formatThreeComp(graphMean,vsVar1Label,idealLabel,true);
+    else formatFourComp(graphMean,vsVar1Label,idealLabel,true);
     if(!baseOutName.empty()) HistFuncs::print(outNameMean,"c1",true);
 
     //now we plot the individual fits to check for errors
@@ -256,8 +275,8 @@ TGraph* ResPlotter::plotFitParamsVsVarComp(const std::vector<ResFitter::ParamsVs
 					   ResFitter::ValType valType,
 					   bool divideSigmaByMean)const
 {
-  if(fits.size()!=2 && fits.size()!=3){
-    std::cout <<"Error: comparisions are only valid for 2 or 3 quanities, not "<<fits.size()<<std::endl;
+  if(fits.size()!=2 && fits.size()!=3 && fits.size()!=4){
+    std::cout <<"Error: comparisions are only valid for 2, 3, or 4 quanities, not "<<fits.size()<<std::endl;
     return nullptr;
   }
 
@@ -411,6 +430,27 @@ void ResPlotter::formatThreeComp(TGraph* graph,TPaveLabel* vsVar1Label,TPaveLabe
   if(isMean) graph->GetYaxis()->SetRangeUser(0.9,1.05);
 }
 
+void ResPlotter::formatFourComp(TGraph* graph,TPaveLabel* vsVar1Label,TPaveLabel* infoLabel,bool isMean)const 
+{
+  float vsVar2Max = vsVar2Bins_.back();
+  float vsVar2Min = vsVar2Bins_.front();
+  
+  auto c1 = static_cast<TCanvas*>(gROOT->FindObject("c1"));
+  c1->SetGridx();
+  c1->SetGridy();
+  c1->Update();
+  auto leg = HistFuncs::getFromCanvas<TLegend>(c1,"TLegend")[0];
+  //HistFuncs::XYCoord(0.644766,0.155052,0.997773,0.301394).setNDC(leg);   
+  HistFuncs::XYCoord(0.57386,0.155137,0.927253,0.301265).setNDC(leg);
+  leg->SetFillStyle(0);
+  leg->Draw();
+  
+  vsVar1Label->Draw();
+  infoLabel->Draw();
+  graph->SetTitle((";"+vsVar2_.axisLabel()).c_str());
+  graph->GetXaxis()->SetRangeUser(vsVar2Min,vsVar2Max); 
+  if(isMean) graph->GetYaxis()->SetRangeUser(0.9,1.05);
+}
 
 
 TGraph* ResPlotter::makeRatio(TGraph* numer,TGraph* denom)
@@ -445,26 +485,30 @@ TGraph* ResPlotter::makeRatio(TGraph* numer,TGraph* denom)
 
 int ResPlotter::getColour(unsigned int colourNr)
 {
-  switch(colourNr%3){
+  switch(colourNr%4){
   case 0:
     return kAzure+8;
   case 1:
     return kOrange+7;
   case 2:
     return kBlue+2;
+  case 3:
+    return kRed+2;
   }
   return 0;
 }
 
 int ResPlotter::getMarkerStyle(unsigned int markerNr)
 {
-  switch(markerNr%3){
+  switch(markerNr%4){
   case 0:
     return 8;
   case 1:
     return 22;
   case 2:
     return 23;
+  case 3:
+    return 21;
   }
   return 0;
 }
