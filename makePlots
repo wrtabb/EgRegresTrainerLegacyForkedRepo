@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export PATH=$PATH:./bin/$SCRAM_ARCH
+export PYTHON27PATH=$PYTHON27PATH:python
+export PYTHONPATH=$PYTHONPATH:python
+export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:$PWD/include
+
+gmake RegressionTrainerExe -j 8
+gmake RegressionApplierExe -j 8
+
+root -l makePlots.C 
+
+
+
