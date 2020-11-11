@@ -365,7 +365,7 @@ RooPlot* ResPlotter::plotResComp(std::vector<ResFitter::Param>& fitParams,
 					  0.149,0.811-fitNr*0.07,
 					  0.402,0.880-fitNr*0.07);
     meanLabel->SetTextColor(getColour(fitNr));
-    meanLabel->Draw();
+    //meanLabel->Draw();
     legEntries.push_back({graph,fitParam.legName});
   }
   fitParams[0].plot->SetMaximum(max*1.05);
@@ -395,7 +395,6 @@ void ResPlotter::formatTwoComp(TGraph* graph,TPaveLabel* vsVar1Label,TPaveLabel*
   topGraph->SetTitle("");
   auto leg = HistFuncs::getFromCanvas<TLegend>(pads[0],"TLegend")[0];
   leg->SetTextSize(0.0440388);
-  //      HistFuncs::XYCoord(0.644766,0.155052,0.997773,0.301394).setNDC(leg);
   HistFuncs::XYCoord(0.57386,0.155137,0.927253,0.301265).setNDC(leg);
   leg->SetFillStyle(0);
   leg->Draw();
@@ -440,8 +439,8 @@ void ResPlotter::formatFourComp(TGraph* graph,TPaveLabel* vsVar1Label,TPaveLabel
   c1->SetGridy();
   c1->Update();
   auto leg = HistFuncs::getFromCanvas<TLegend>(c1,"TLegend")[0];
-  //HistFuncs::XYCoord(0.644766,0.155052,0.997773,0.301394).setNDC(leg);   
-  HistFuncs::XYCoord(0.57386,0.155137,0.927253,0.301265).setNDC(leg);
+  //HistFuncs::XYCoord(0.57386,0.155137,0.927253,0.301265).setNDC(leg);
+  HistFuncs::XYCoord(0.714286,0.155137,0.927253,0.301265).setNDC(leg);
   leg->SetFillStyle(0);
   leg->Draw();
   

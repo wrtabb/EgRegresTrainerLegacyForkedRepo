@@ -5,9 +5,9 @@ void makePlots()
 {
  //-----parameters-----//
  //Which plots to plot
- bool etaPlot = false;
- bool puPlot = true;
- bool ePlot = true;
+ bool etaPlot = true;
+ bool puPlot =  true;
+ bool ePlot =   true;
  //Double crystal ball fit option (default is Cruijff)
  bool dcbFit = true;
 
@@ -44,16 +44,16 @@ void plot(bool etaPlot, bool puPlot, bool ePlot,bool dcbFit)
   gROOT->ProcessLine("res.printFits({1,2},\"../plots/ThreshForECAL/TL235/Eta_\")");
 */
   //All Four
-  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,treeTL150,treeTL180,treeTL235},\"\",\"mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && eventnr%5>=3\",\"mc.pt\",\"sc.seedEta\",etBins,etaBins)");
+  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,treeTL150,treeTL180,treeTL235},\"\",\"mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && eventnr%5>=3\",\"mc.pt\",\"abs(sc.seedEta)\",etBins,absEtaBins)");
   gROOT->ProcessLine("res.printFits({2,5,8,11},\"../plots/ThreshForECAL/AllFour/Eta_\")");
 
  }
  //Pileup
  if(puPlot){
-  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,treeTL150,treeTL180,treeTL235},\"Barrel\",\"abs(sc.seedEta)<1.442 && mc.energy>0 && sc.rawEnergy>0 && ssFrac.sigmaIEtaIEta>0 && mc.dR<0.1 && ele.et>0 && eventnr%5>=3\",\"mc.pt\",\"nrVert\",etBins,puBins)");
+  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,treeTL150,treeTL180,treeTL235},\"Barrel\",\"abs(sc.seedEta)<1.442 && mc.energy>0 && sc.rawEnergy>0 && ssFrac.sigmaIEtaIEta>0 && mc.dR<0.1 && ele.et>0 && eventnr%5>=3\",\"mc.pt\",\"nrVert\",ptOneBin,puBins)");
   gROOT->ProcessLine("res.printFits({2,5,8,11},\"../plots/ThreshForECAL/AllFour/PU_EB_\")");
 
-  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,treeTL150,treeTL180,treeTL235},\"Endcap\",\"abs(sc.seedEta)>1.566 && mc.energy>0 && sc.rawEnergy>0 && ssFrac.sigmaIEtaIEta>0 && mc.dR<0.1 && ele.et>0 && eventnr%5>=3\",\"mc.pt\",\"nrVert\",etBins,puBins)");
+  gROOT->ProcessLine("res.makeHists({treeTL150_Mixed,treeTL150,treeTL180,treeTL235},\"Endcap\",\"abs(sc.seedEta)>1.566 && mc.energy>0 && sc.rawEnergy>0 && ssFrac.sigmaIEtaIEta>0 && mc.dR<0.1 && ele.et>0 && eventnr%5>=3\",\"mc.pt\",\"nrVert\",ptOneBin,puBins)");
   gROOT->ProcessLine("res.printFits({2,5,8,11},\"../plots/ThreshForECAL/AllFour/PU_EE_\")");
  }
 
