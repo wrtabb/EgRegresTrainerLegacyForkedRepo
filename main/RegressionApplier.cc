@@ -112,7 +112,7 @@ int main(int argc, char** argv)
   cmdLineInt.addOption("highEtThres",&highEtThres,std::numeric_limits<double>::max(),"threshold at which to apply the high Et forests");
   cmdLineInt.addOption("etBinVar",etBinVar,"(sc.rawEnergy+sc.rawESEnergy)*sin(2*atan(exp(-1*sc.scEta)))","et variable to bin vs");
   cmdLineInt.addOption("nrThreads",&nrThreads,1,"number of threads for reading tree");
-  cmdLineInt.addOption("treeName",treeName,"egRegTree"," name of the tree");
+  cmdLineInt.addOption("treeName",treeName,"egRegTreeRef"," name of the tree");
   cmdLineInt.addOption("regOutTag",regOutTagChar,"","tag of the output regression branches , eg \"reg{regOutTagChar}Mean\" if writing full tree");
   cmdLineInt.addOption("writeFullTree",&writeFullTree,false," writes the full tree to file");
   if(!cmdLineInt.processCmdLine(argc,argv)) return 0; //exit if we havnt managed to get required parameters

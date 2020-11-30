@@ -31,9 +31,9 @@ void ResPlotter::Config::setDefaults()
   divideMeanBySigma = true;
 
   std::vector<std::pair<std::string,std::string> > varsTree1 = {
-    {"invTar","inverse target"},
+    {"mean*invTar","corrected SC energy"},
     {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    {"mean*invTar","corrected SC energy"}
+    {"invTar","corrected SC energy"}
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
