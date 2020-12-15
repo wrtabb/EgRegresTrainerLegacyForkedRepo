@@ -29,36 +29,32 @@ void ResPlotter::Config::setDefaults()
 
   binLabelPrecision = 3;
   divideMeanBySigma = true;
-
   std::vector<std::pair<std::string,std::string> > varsTree1 = {
-    {"invTar","inverse target"},
-    {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    {"mean*invTar","ThrMixed"}
+    {"(sc.rawEnergy)/mc.energy","Raw SC Energy"},// temp
+    {"mean*invTar","Corrected SC Energy"},  // temp
+    {"mean*invTar","TL150_Thr150_RegTL150_ThrTL150"},// 0
+    {"mean*invTar","TL180_ThrTL180_RegTL180TL180"},  // 1
+    {"mean*invTar","TL150_ThrTL180_RegTL180TL180"},  // 2
+    {"mean*invTar","TL235_ThrTL180_RegTL180TL180"},  // 3
+    {"mean*invTar","TL235_ThrTL180_RegTL180TL180"}   // 4
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
-    {"invTar","inverse target"},
-    {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    {"mean*invTar","ThrTL150"}
+    {"mean*invTar","TL150_ThrMixed_RegTL150Mixed"},  // 5
+    {"mean*invTar","TL180_ThrMixed_RegTL150Mixed"},  // 6
+    {"mean*invTar","TL150_Thr150_RegTL150TL150"},    // 7
+    {"mean*invTar","TL235_ThrTL235_RegTL235TL235"},  // 8
+    {"mean*invTar","TL180_ThrTL180_RegTL180TL180"}   // 9
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree3 = {
-    {"invTar","inverse target"},
-    {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    {"mean*invTar","ThrTL180"}
-  };
-
-  std::vector<std::pair<std::string,std::string> > varsTree4 = {
-    {"invTar","inverse target"},
-    {"(sc.rawEnergy+sc.rawESEnergy)/mc.energy","uncorrected SC energy"},
-    {"mean*invTar","ThrTL235"}
+    {"mean*invTar","TL235_ThrTL180_RegTL180TL180"}   // 10
   };
 
   vars.clear();
   vars.push_back(varsTree1);
   vars.push_back(varsTree2);
   vars.push_back(varsTree3);
-  vars.push_back(varsTree4);
 }
 
 void ResPlotter::VarNameData::autoFill()
@@ -95,11 +91,11 @@ void ResPlotter::makeHists(std::vector<TTree*> trees,const std::string& label,co
 			   const std::vector<double>& vsVar1Bins,const std::vector<double>& vsVar2Bins)
 {
   
-  if(trees.size()!=cfg_.vars.size()){
+/*  if(trees.size()!=cfg_.vars.size()){
     LogErr<<" error trees size "<<trees.size()<<" does not equal vars size "<<cfg_.vars.size()<<std::endl;
     return;
   }
-
+*/
   histsVec_.clear(); //nasty memory leak here fix it
   histsVec_.resize(vsVar1Bins.size()-1);
   vsVar1Bins_ = vsVar1Bins;

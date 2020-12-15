@@ -13,23 +13,13 @@ def main():
     parser = argparse.ArgumentParser(description='runs the SC regression trainings')
     parser.add_argument('--tag',required=True,help='Threshold tag to run on. Options are TL150, TL180, or TL235')
     parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/ThreshForECAL',help='input directory with the ntuples')
-    parser.add_argument('--output_dir','-o',default="../results/ThreshForECAL",help='output dir')
+    parser.add_argument('--output_dir','-o',default="../results/ThreshForECAL/",help='output dir')
     args = parser.parse_args()
-
-    #step 1, run calo only regression on the ideal IC to get the mean
-    #step 2, apply the mean to the real IC sample and save the result in a tree
-    #step 3, retrain the resolution for the real IC on the corrected energy
-    run_step1 = True
-    run_step2 = False 
-    run_step3 = False
 
     #setup the selection (event number cuts come later)
     cuts_name = "stdCuts" 
     base_ele_cuts = "(mc.energy>0 && ssFrac.sigmaIEtaIEta>0 && ssFrac.sigmaIPhiIPhi>0 && {extra_cuts})"
-    
-    # Splitting samples 60/40 for training then testing
-    # 3 million training sample
-    # 2 million testing sample
+    # Run regression on 3,000,000 superclusters (sample contains 5,000,000) 
     if args.tag=='TL150':
         base_reg_name = "scRegTL150"
         input_ideal_ic  = "{}/TL150/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL150_106X_mcRun3_TL150fb_realistic_v1_ext1-v1_EGRegNtups.root".format(args.input_dir)
@@ -67,7 +57,7 @@ def main():
     if not os.path.exists(args.output_dir):
         os.makedirs(args.output_dir)
 
-    if run_step1: regArgs.run_eb_and_ee()
+    regArgs.run_eb_and_ee()
     
     regArgs.do_eb = True
     forest_eb_file = regArgs.output_name()
