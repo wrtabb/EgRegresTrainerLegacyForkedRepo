@@ -27,14 +27,14 @@
   std::string treeFriendName = "egRegTree34SigmaFriend";
   
   //TL150_Thr150_RegTL150TL150
-  std::string TL150_Thr150_RegTL150TL150_Results = "backup/scRegTL150_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
+  std::string TL150_Thr150_RegTL150TL150_Results = "scRegTL150_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
   std::string TL150_Thr150_RegTL150TL150_Input = "TL150/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL150_106X_mcRun3_TL150fb_realistic_v1_ext1-v1_EGRegNtups.root"; 
   TTree*treeTL150_Thr150_RegTL150TL150 = HistFuncs::makeChain(treeName,inputDirectory+TL150_Thr150_RegTL150TL150_Input,1,1,1);
   TTree*treeTL150_Thr150_RegTL150TL150Friend = HistFuncs::makeChain(treeFriendName,resultsDirectory+TL150_Thr150_RegTL150TL150_Results,1,1,1);
   treeTL150_Thr150_RegTL150TL150->AddFriend(treeTL150_Thr150_RegTL150TL150Friend); 
 
   //TL150_ThrMixed_RegTL150Mixed 
-  std::string TL150_ThrMixed_RegTL150Mixed_Results = "backup/scRegTL150_Mixed_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
+  std::string TL150_ThrMixed_RegTL150Mixed_Results = "scRegTL150_Mixed_IdealIC_IdealTraining_stdVar_stdCuts_ntrees1500_applied.root"; 
   std::string TL150_ThrMixed_RegTL150Mixed_Input = "TL150/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL150_106X_mcRun3_TL150fb_realistic_v1_ext1-v1_EGRegNtups.root"; 
   TTree*treeTL150_ThrMixed_RegTL150Mixed = HistFuncs::makeChain(treeMixedName,inputDirectory+TL150_ThrMixed_RegTL150Mixed_Input,1,1,1);
   TTree*treeTL150_ThrMixed_RegTL150MixedFriend = HistFuncs::makeChain(treeMixedFriendName,resultsDirectory+TL150_ThrMixed_RegTL150Mixed_Results,1,1,1);
@@ -55,7 +55,7 @@
   treeTL180_ThrMixed_RegTL150Mixed->AddFriend(treeTL180_ThrMixed_RegTL150MixedFriend); 
   
   //TL150_ThrTL180_RegTL180TL180
-  std::string TL150_ThrTL180_RegTL180TL180_Results = "backup/scReg_TL150_ThrTL180_RegTL180TL180.root"; 
+  std::string TL150_ThrTL180_RegTL180TL180_Results = "scReg_TL150_ThrTL180_RegTL180TL180.root"; 
   std::string TL150_ThrTL180_RegTL180TL180_Input = "TL150/DoubleElectron_FlatPt-1To100_ntuples_ECALFlatPU0to80RAWTL150_106X_mcRun3_TL150fb_realistic_v1_ext1-v1_EGRegNtups.root"; 
   TTree*treeTL150_ThrTL180_RegTL180TL180 = HistFuncs::makeChain(treeRefName,inputDirectory+TL150_ThrTL180_RegTL180TL180_Input,1,1,1);
   TTree*treeTL150_ThrTL180_RegTL180TL180Friend = HistFuncs::makeChain(treeRefFriendName,resultsDirectory+TL150_ThrTL180_RegTL180TL180_Results,1,1,1);

@@ -43,7 +43,7 @@ def main():
     regArgs.cfg_dir = "configs"
     regArgs.out_dir = args.output_dir
     regArgs.cuts_name = cuts_name
-    regArgs.base_name = "{}_IdealIC_IdealTraining".format(base_reg_name)
+    regArgs.base_name = "{}Mixed_IdealIC_IdealTraining".format(base_reg_name)
     regArgs.cuts_base = base_ele_cuts.format(extra_cuts = ideal_eventnr_cut)
     regArgs.ntrees = 1500
  
