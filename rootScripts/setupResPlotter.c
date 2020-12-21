@@ -1,6 +1,6 @@
 {
   //binning
-  std::vector<double> ptOneBin{15,300};
+  std::vector<double> ptOneBin{1,300};
   std::vector<double> puBins = {0,5,10,15,20,25,30,35,40,45,50,55,60,65,70};
   std::vector<double> eBins= {0,3500};
   std::vector<double> puOneBin = {0,70};
@@ -12,9 +12,6 @@
   std::vector<double> etBinsSC = {25,40,50,60};
   std::vector<double> etBinsCoarse = {1,20,60,100,120,160,200,220,260,300};
   std::vector<double> etBinSingle = {1,300};
-  std::vector<double> etBinsHE = {5,300,1000,1500,3000,4000,5000}; 
-  std::vector<double> etBinsHEFine = {5,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600,2700,2800,2900,3000,3100,3200,3300,3400,3500,3600,3700,3800,3900,4000,4100,4200,4300,4400,4500,4600,4700,4800,4900,5000}; 
-  std::vector<double> etBinsOneBin = {5,5000};
 
   //mcEnergy Bins
   std::vector<double> mcEBins = {1,500,1000,1500,2000,3500};

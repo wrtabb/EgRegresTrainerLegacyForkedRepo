@@ -12,8 +12,8 @@ def main():
 
     parser = argparse.ArgumentParser(description='runs the SC regression trainings')
     parser.add_argument('--era',required=True,help='year to produce for, 2016, 2017, 2018 are the options')
-    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/ECAlPaperTrees',help='input directory with the ntuples')
-    parser.add_argument('--output_dir','-o',default="/home/hep/wrtabb/Egamma/results/ECALPaper",help='output dir')
+    parser.add_argument('--input_dir','-i',default='/home/hep/wrtabb/Egamma/input_trees/2018UL',help='input directory with the ntuples')
+    parser.add_argument('--output_dir','-o',default="/home/hep/wrtabb/Egamma/results/2018UL",help='output dir')
     args = parser.parse_args()
 
     #setup the selection (event number cuts come later)
@@ -31,6 +31,10 @@ def main():
     elif args.era=='2018':
         base_reg_name = "scReg2018UL"    
         input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To300_FlatPU0to70_ECAL5_106X_upgrade2018_realistic_v11_L1v1-v2_AODSIM_EgRegTree.root".format(args.input_dir)
+        ideal_eventnr_cut = "evt.eventnr%5 < 3"
+    elif args.era=='2018UL':
+        base_reg_name = "scReg2018UL"    
+        input_ideal_ic  = "{}/DoubleElectron_FlatPt-1To300_2018ConditionsFlatPU0to70ECALGT_105X_upgrade2018_realistic_IdealEcalIC_v4-v1_AODSIM_EgRegTreeV5Refined.root".format(args.input_dir)
         ideal_eventnr_cut = "evt.eventnr%5 < 3"
     else:
         raise ValueError("era {} is invalid, options are 2016/2017/2018".format(era))
