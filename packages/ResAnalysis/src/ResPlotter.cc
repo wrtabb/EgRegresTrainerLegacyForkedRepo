@@ -37,7 +37,7 @@ void ResPlotter::Config::setDefaults()
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
-    {"mean*invTar","E-p combination"}
+    {"mean*invTar","2018UL corrected SC energy"}
   };
 
   vars.clear();
