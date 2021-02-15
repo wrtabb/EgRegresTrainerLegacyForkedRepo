@@ -30,25 +30,15 @@ void ResPlotter::Config::setDefaults()
   binLabelPrecision = 3;
   divideMeanBySigma = true;
   std::vector<std::pair<std::string,std::string> > varsTree1 = {
-    {"(sc.rawEnergy)/mc.energy","Raw SC Energy"},// temp
-    {"mean*invTar","Corrected SC Energy"},  // temp
-    {"mean*invTar","TL150_Thr150_RegTL150_ThrTL150"},// 0
-    {"mean*invTar","TL180_ThrTL180_RegTL180TL180"},  // 1
-    {"mean*invTar","TL150_ThrTL180_RegTL180TL180"},  // 2
-    {"mean*invTar","TL235_ThrTL180_RegTL180TL180"},  // 3
-    {"mean*invTar","TL235_ThrTL180_RegTL180TL180"}   // 4
+    {"(sc.rawEnergy)/mc.energy","Mixed"}
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree2 = {
-    {"mean*invTar","TL150_ThrMixed_RegTL150Mixed"},  // 5
-    {"mean*invTar","TL180_ThrMixed_RegTL150Mixed"},  // 6
-    {"mean*invTar","TL150_Thr150_RegTL150TL150"},    // 7
-    {"mean*invTar","TL235_ThrTL235_RegTL235TL235"},  // 8
-    {"mean*invTar","TL180_ThrTL180_RegTL180TL180"}   // 9
+    {"(sc.rawEnergy)/mc.energy","34Sigma"}
   };
 
   std::vector<std::pair<std::string,std::string> > varsTree3 = {
-    {"mean*invTar","TL235_ThrTL180_RegTL180TL180"}   // 10
+    {"(sc.rawEnergy)/mc.energy","Ref"}
   };
 
   vars.clear();
@@ -160,7 +150,7 @@ ResPlotter::makeHists(TTree* tree,const std::vector<std::pair<std::string,std::s
 void ResPlotter::printFits(const std::vector<int>& histNrs,const std::string& baseOutName)const
 {
   bool twoComp = histNrs.size()==2;  
-  bool threeComp = histNrs.size()==2;
+  bool threeComp = histNrs.size()==3;
   if(histNrs.size()!=2 && histNrs.size()!=3 && histNrs.size()!=4){
     LogErr << "Error, number of selected histograms must be either 2, 3, or 4, not "<<histNrs.size()<<std::endl;
     return;
